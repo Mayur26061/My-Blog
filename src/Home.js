@@ -1,28 +1,21 @@
 import { useState } from "react";
+import Bloglist from "./BlogList";
 const Home = () => {
-    const [name, setName] = useState("Mayur")
-    const [age, setAge] = useState(22)
-    // let name = "Mayur";
-    // let age = 22
-    const clickMe = (ev,name,age)=>{
-        setName(name)
-        setAge(age)
+    const [blogs, setBlogs] = useState([
+        { title: 'My new website', body: 'lorem ipsum...', author: 'mario', id: 1 },
+        { title: 'Welcome party!', body: 'lorem ipsum...', author: 'yoshi', id: 2 },
+        { title: 'Web dev top tips', body: 'lorem ipsum...', author: 'mario', id: 3 }
+    ])
+    const handleClick = (id) => {
+        const newBlogs = blogs.filter((blog) => blog.id !== id)
+        setBlogs(newBlogs)
     }
-    return ( 
+    return (
         <div className="home">
-            <input type="text" className="name" placeholder="Enter name"/>
-            <input type="number" className="age" placeholder="Enter age"/>
-            Home
-            <p>My name is {name} and age is {age}</p>
-            <button onClick={(ev)=>{
-                let ageElement = document.querySelector('.age')
-                let nameElement = document.querySelector('.name')
-                let age = ageElement.value.trim()
-                let name = nameElement.value.trim()
-                clickMe(ev,name,age)
-                }}>Click</button>
+            <Bloglist blogs={blogs} title="All blogs" handleClick={handleClick} />
+            <Bloglist blogs={blogs.filter((blog) => blog.author === 'mario')} title="Mario's Blog" handleClick={handleClick} />
         </div>
-     );
+    );
 }
- 
+
 export default Home;
