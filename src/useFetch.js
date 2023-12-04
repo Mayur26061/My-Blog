@@ -21,9 +21,10 @@ const useFetch = (url) => {
 
             })
             .catch((err)=>{
-                console.log(err)
-                setErrormsg(err.message)
-                setIsPending(false)
+                
+                    setErrormsg(err.message)
+                    setIsPending(false)
+                
 
             })
         },1000)
