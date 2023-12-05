@@ -1,13 +1,15 @@
 import { useState } from 'react'
+import {useNavigate } from 'react-router-dom'
 const Create = () => {
     const [title, setTitle] = useState('')
     const [body, setBody] = useState('')
     const [author, setAuthor] = useState('me')
+    const [isPending, setIsPending] = useState(false)
+    const navigate = useNavigate ()
     const onCreateBlog = (ev) => {
         const blog = { title, body, author }
         ev.preventDefault()
-        debugger;
-
+        setIsPending(true)
         fetch("http://localhost:8000/blogs", {
             method: "POST",
             headers: {
@@ -16,6 +18,8 @@ const Create = () => {
             body: JSON.stringify(blog)
         }).then(() => {
             console.log("done")
+            setIsPending(false)
+            navigate('/')
         })
         ev.target.reset()
     }
@@ -52,7 +56,9 @@ const Create = () => {
                     </div>
                 </div>
                 <div className="create-button">
-                    <input type="submit" value="Add Blog" />
+                   
+                    {!isPending &&  <input type="submit" value="Add Blog" />}
+                    { isPending && <input type="submit" value="Loading" disabled/>}
                 </div>
             </form>
         </div>

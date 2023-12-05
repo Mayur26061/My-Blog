@@ -94,3 +94,18 @@
 .create textarea {
   height: 220px;
 }
+article button{
+  margin-top: 20px;
+  padding: 5px 30px;
+  background-color: #f1356d;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.not-found > h1{
+  margin-bottom: 20px;
+}
+.not-found p{
+  margin: 10px 0;
+}
